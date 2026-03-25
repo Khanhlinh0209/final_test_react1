@@ -1,0 +1,151 @@
+.page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, rgba(170, 59, 255, 0.08) 0%, transparent 45%);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter: blur(6px);
+}
+
+.brand {
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: var(--text-h);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-link {
+  color: var(--text-h);
+  text-decoration: none;
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+
+.nav-link:hover {
+  background: var(--accent-bg);
+}
+
+.app {
+  min-height: calc(100vh - 68px);
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.card {
+  width: min(760px, 100%);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px;
+  text-align: left;
+  display: grid;
+  gap: 12px;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  box-shadow: var(--shadow);
+}
+
+.card h1 {
+  margin: 0 0 4px;
+  font-size: 32px;
+}
+
+.form {
+  display: grid;
+  gap: 10px;
+}
+
+.welcome {
+  margin: 0;
+  padding: 12px;
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+}
+
+label {
+  display: grid;
+  gap: 6px;
+}
+
+input {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: transparent;
+  color: var(--text-h);
+}
+
+button {
+  border: 1px solid var(--accent-border);
+  background: var(--accent-bg);
+  color: var(--text-h);
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.ghost-btn {
+  background: transparent;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error {
+  color: #d73a49;
+  margin: 0;
+}
+
+.employee-list {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 6px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.employee-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.employee-table th,
+.employee-table td {
+  border: 1px solid var(--border);
+  padding: 8px 10px;
+  text-align: left;
+}
+
+.employee-table th {
+  color: var(--text-h);
+  background: var(--accent-bg);
+}
+
+.row-actions {
+  display: flex;
+  gap: 8px;
+}
+
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
