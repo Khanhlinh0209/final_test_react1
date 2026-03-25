@@ -1,3 +1,4 @@
+import { isAxiosError } from "axios";
 import { useState, type SubmitEvent } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useAuth } from "../hooks/useAuth";
@@ -20,10 +21,25 @@ export function LoginPage({ onLoginSuccess }: LoginPageProps) {
     onSuccess: () => {
       onLoginSuccess?.();
     },
-    
+    onError: (err: unknown) => {
+      if (!import.meta.env.VITE_API_BASE_URL) {
+        setError("Missing VITE_API_BASE_URL. Create .env (not .env.example) then restart npm run dev.");
+      } else if (isAxiosError(err)) {
+        const status = err.response?.status;
+        setError(
+          status
+            ? `Login request failed (HTTP ${status}). Check /login/1 endpoint and CORS.`
+            : "Cannot reach MockAPI. Check VITE_API_BASE_URL and internet connection.",
+        );
+      } else {
+        setError("Login failed. Email must match mockapi and password is 123456.");
+      }
+      // eslint-disable-next-line no-console
+      console.error(err);
+    },
   });
 
-  const handleLogin = async (event: SubmitEvent<HTMLFormElement>) => {
+  const handleLogin = (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
     setError(null);
 
@@ -37,7 +53,7 @@ export function LoginPage({ onLoginSuccess }: LoginPageProps) {
       return;
     }
 
-    await loginMutation.mutateAsync(validation.data);
+    loginMutation.mutate(validation.data);
   };
 
   return (

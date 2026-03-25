@@ -13,9 +13,9 @@ type LoginRecord = {
 export const authService = {
   login: async (email: string, password: string): Promise<LoginResponse> => {
     const { data } = await axiosClient.get<LoginRecord>("/login/1");
-    const normalizedInputEmail = email.trim().toLowerCase();
+    const normalizedInputEmail = (email ?? "").trim().toLowerCase();
     const normalizedApiEmail = data.email.trim().toLowerCase();
-    const isValidPassword = password === "123456";
+    const isValidPassword = (password ?? "") === "123456";
 
     if (normalizedApiEmail !== normalizedInputEmail || !isValidPassword) {
       throw new Error("Invalid email or password.");
